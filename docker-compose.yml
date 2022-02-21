@@ -1,0 +1,33 @@
+version: '3'
+services:
+  application:
+    build:
+      context: .
+      args:
+        postgres_host: postgres-db
+        postgres_port: 5432
+        postgres_username: postgres
+        postgres_password: postgres
+        postgres_db: pg
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres-db
+    networks:
+      - atividade2
+  postgres-db:
+    image: postgres:13.6-alpine
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=pg
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - atividade2
+
+volumes:
+  db-data:
+
+networks:
+  atividade2:

@@ -1,10 +1,29 @@
-# pg-user-hexagonal
+## PG user Application Hexagonal Architecture
 Hexagonal project example
 
 <img src="https://i.imgur.com/D3JoUhg.png"/>
 
-Running the project on Java 11
+#### Running the application with Docker
+Clone repository ``git clone https://github.com/JonasXPX/pg-user-hexagonal.git ``
 
-```
-mvn clean install && mvn spring-boot:run -f pg-application/pom.xml
-```
+Deploy with
+`` docker-compose up ``
+
+#### Test the application
+
+Register a user
+````shell
+curl --request POST \
+  --url http://localhost:8080/pg-user \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"id": null,
+	"name": "test"
+}'
+````
+
+List the users
+````shell
+curl --request GET \
+  --url http://localhost:8080/pg-user
+````
