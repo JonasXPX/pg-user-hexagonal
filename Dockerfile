@@ -1,4 +1,4 @@
-FROM maven:3-adoptopenjdk-11 as build
+FROM maven:3-jdk-11-slim as build
 LABEL maintainer="Jonas de Farias Peretiatko <jonasdefarias@hotmail.com>"
 
 WORKDIR /app
@@ -12,7 +12,7 @@ COPY --from=build /app /app
 
 RUN mvn -Dmaven.repo.local=/app/.m2/ install spring-boot:repackage -pl pg-application
 
-FROM build-spring-boot as deploy
+FROM openjdk:11-jre-slim as deploy
 
 WORKDIR /home/app/application
 
